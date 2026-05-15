@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Konsier AI System — Training & Operations Map</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      padding: 32px 24px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #1e2433;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f1f5f9;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .header p {
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    /* Section base */
+    .section {
+      background: #161922;
+      border: 1px solid #1e2433;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 6px;
+    }
+    .section-sub {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 24px;
+    }
+
+    /* Training hierarchy */
+    .hierarchy {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 0;
+    }
+    .h-row {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .h-node {
+      background: #1e2433;
+      border: 2px solid #2d3748;
+      border-radius: 10px;
+      padding: 16px 24px;
+      min-width: 180px;
+      text-align: center;
+    }
+    .h-node .role {
+      font-size: 11px;
+      color: #94a3b8;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .h-node .name {
+      font-size: 16px;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 4px;
+    }
+    .h-node .desc {
+      font-size: 11px;
+      color: #64748b;
+    }
+    .h-node.claude { border-color: #8b5cf6; background: rgba(139,92,246,0.1); }
+    .h-node.claude .role { color: #c4b5fd; }
+    .h-node.vlad { border-color: #6366f1; background: rgba(99,102,241,0.1); }
+    .h-node.vlad .role { color: #a5b4fc; }
+    .h-node.va { border-color: #f59e0b; background: rgba(245,158,11,0.1); }
+    .h-node.va .role { color: #fcd34d; }
+    .h-node.drew { border-color: #10b981; background: rgba(16,185,129,0.1); }
+    .h-node.drew .role { color: #6ee7b7; }
+
+    .arrow {
+      font-size: 24px;
+      color: #475569;
+      text-align: center;
+    }
+    .arrow-h {
+      display: flex;
+      align-items: center;
+      font-size: 22px;
+      color: #475569;
+    }
+
+    .training-badge {
+      display: inline-block;
+      font-size: 10px;
+      background: #312e81;
+      color: #c7d2fe;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+    }
+
+    /* Role columns */
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 1000px) {
+      .roles-grid { grid-template-columns: 1fr; }
+    }
+    .role-card {
+      background: #1e2433;
+      border: 1px solid #2d3748;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .role-card.vlad-role { border-top: 3px solid #6366f1; }
+    .role-card.outbound-role { border-top: 3px solid #f59e0b; }
+    .role-card.fulfillment-role { border-top: 3px solid #ec4899; }
+    .role-card h3 {
+      font-size: 16px;
+      color: #f1f5f9;
+      margin-bottom: 4px;
+    }
+    .role-card .status {
+      display: inline-block;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .status-active { background: #052e16; color: #10b981; }
+    .status-pending { background: #1e1b4b; color: #a78bfa; }
+    .status-later { background: #422006; color: #fbbf24; }
+
+    .role-card .mission {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 16px;
+      line-height: 1.5;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #2d3748;
+    }
+    .role-card .label {
+      font-size: 10px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      margin-top: 12px;
+    }
+    .role-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .role-card li {
+      font-size: 12px;
+      color: #cbd5e1;
+      padding: 4px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+    .role-card li:before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: #475569;
+    }
+
+    /* Flow diagram */
+    .flow-diagram {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding: 20px 0;
+    }
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .flow-box {
+      background: #1e2433;
+      border: 1px solid #2d3748;
+      border-radius: 8px;
+      padding: 12px 18px;
+      min-width: 140px;
+      text-align: center;
+    }
+    .flow-box .tag {
+      font-size: 9px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .flow-box .name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+    .flow-box.tool { border-color: #3b82f6; background: rgba(59,130,246,0.08); }
+    .flow-box.agent { border-color: #8b5cf6; background: rgba(139,92,246,0.08); }
+    .flow-box.action { border-color: #10b981; background: rgba(16,185,129,0.08); }
+    .flow-box.va { border-color: #f59e0b; background: rgba(245,158,11,0.08); }
+
+    /* Training path */
+    .training-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 800px) {
+      .training-grid { grid-template-columns: 1fr; }
+    }
+    .train-card {
+      background: #1e2433;
+      border: 1px solid #2d3748;
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .train-card .num {
+      display: inline-block;
+      background: #6366f1;
+      color: #fff;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 22px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+    .train-card h4 {
+      display: inline-block;
+      font-size: 14px;
+      color: #f1f5f9;
+    }
+    .train-card .progress {
+      font-size: 10px;
+      color: #64748b;
+      margin-top: 6px;
+      margin-bottom: 10px;
+    }
+    .train-card .skills {
+      font-size: 11px;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: #2d3748;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #10b981;
+    }
+    .progress-fill.partial { background: #f59e0b; }
+    .progress-fill.early { background: #6366f1; }
+
+    .footer {
+      text-align: center;
+      padding-top: 24px;
+      margin-top: 32px;
+      border-top: 1px solid #1e2433;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .legend {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      font-size: 11px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #94a3b8;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <h1>Konsier AI System — Training & Operations Map</h1>
+      <p>How Claude trains Vladimir, who builds the system and trains the 2 VAs — May 15, 2026</p>
+    </div>
+
+
+    <!-- Training Hierarchy -->
+    <div class="section">
+      <div class="section-title">1. Training & Authority Chain</div>
+      <div class="section-sub">Who trains who, and who reports to who</div>
+
+      <div class="hierarchy">
+
+        <div class="h-row">
+          <div class="h-node drew">
+            <div class="role">Owner</div>
+            <div class="name">Drew Gregor</div>
+            <div class="desc">Founder · Sets strategy · Approves work</div>
+          </div>
+        </div>
+
+        <div class="arrow">↓</div>
+
+        <div class="h-row">
+          <div class="h-node claude">
+            <div class="role">AI Training Partner</div>
+            <div class="name">Claude</div>
+            <div class="desc">Trains Vladimir on every tool + workflow as system is built</div>
+            <div class="training-badge">Real-time learning</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="h-node vlad">
+            <div class="role">Builder + Operator</div>
+            <div class="name">Vladimir</div>
+            <div class="desc">Builds the system · Operates n8n · Trains VAs after launch</div>
+            <div class="training-badge">Currently learning</div>
+          </div>
+        </div>
+
+        <div class="arrow">↓</div>
+
+        <div class="h-row">
+          <div class="h-node va">
+            <div class="role">Role 1</div>
+            <div class="name">Outbound VA</div>
+            <div class="desc">Hired after launch · Manages cold outreach + replies</div>
+            <div class="training-badge">Trained by Vladimir</div>
+          </div>
+          <div class="h-node va">
+            <div class="role">Role 3</div>
+            <div class="name">Fulfillment VA</div>
+            <div class="desc">Hired after customer 3-5 · Handles onboarding + support</div>
+            <div class="training-badge">Trained by Vladimir</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Konsier System Flow -->
+    <div class="section">
+      <div class="section-title">2. Konsier AI System — Full Operational Flow</div>
+      <div class="section-sub">How leads enter the system and become live customers</div>
+
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Tool</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>AI Agent</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>Action</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>VA Involvement</div>
+      </div>
+
+      <div class="flow-diagram">
+
+        <!-- Top of funnel -->
+        <div class="flow-row">
+          <div class="flow-box tool">
+            <div class="tag">Lead Source 1</div>
+            <div class="name">Apollo (Outbound)</div>
+          </div>
+          <div class="flow-box tool">
+            <div class="tag">Lead Source 2</div>
+            <div class="name">WordPress Form</div>
+          </div>
+          <div class="flow-box tool">
+            <div class="tag">Lead Source 3</div>
+            <div class="name">Phone Call to konsier.ai</div>
+          </div>
+        </div>
+        <div class="arrow">↓</div>
+
+        <!-- Outbound -->
+        <div class="flow-row">
+          <div class="flow-box action">
+            <div class="tag">KS-WF6</div>
+            <div class="name">ICP Score & Filter</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box agent">
+            <div class="tag">Agent #1</div>
+            <div class="name">Outbound Operator</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box tool">
+            <div class="tag">Tool</div>
+            <div class="name">Instantly Campaign</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box tool">
+            <div class="tag">Tool</div>
+            <div class="name">HeyReach (LinkedIn)</div>
+          </div>
+        </div>
+        <div class="arrow">↓</div>
+
+        <!-- Reply triage -->
+        <div class="flow-row">
+          <div class="flow-box action">
+            <div class="tag">Lead Replies</div>
+            <div class="name">Instantly Reply Webhook</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box agent">
+            <div class="tag">Agent #2</div>
+            <div class="name">Reply Triage</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box va">
+            <div class="tag">Outbound VA</div>
+            <div class="name">Review & Edit Reply</div>
+          </div>
+        </div>
+        <div class="arrow">↓</div>
+
+        <!-- Qualification -->
+        <div class="flow-row">
+          <div class="flow-box tool">
+            <div class="tag">KS-WF2/3</div>
+            <div class="name">Retell AI Call</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box agent">
+            <div class="tag">Agent #3</div>
+            <div class="name">Qualification Analyzer</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box action">
+            <div class="tag">Pipedrive</div>
+            <div class="name">Stage 91 (AI Qualified)</div>
+          </div>
+        </div>
+        <div class="arrow">↓</div>
+
+        <!-- Demo + booking -->
+        <div class="flow-row">
+          <div class="flow-box tool">
+            <div class="tag">Tool</div>
+            <div class="name">Wistia (Async Demo)</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box agent">
+            <div class="tag">Agent #4</div>
+            <div class="name">Closer Copilot</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box tool">
+            <div class="tag">Tool</div>
+            <div class="name">Calendly Booking</div>
+          </div>
+        </div>
+        <div class="arrow">↓</div>
+
+        <!-- Payment + onboarding -->
+        <div class="flow-row">
+          <div class="flow-box tool">
+            <div class="tag">Tool</div>
+            <div class="name">Stripe Checkout</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box agent">
+            <div class="tag">Agent #6</div>
+            <div class="name">Onboarding Drafter</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box va">
+            <div class="tag">Fulfillment VA</div>
+            <div class="name">Configure Retell for Customer</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box action">
+            <div class="tag">Live</div>
+            <div class="name">Customer Receptionist Active</div>
+          </div>
+        </div>
+        <div class="arrow">↓</div>
+
+        <!-- Customer success -->
+        <div class="flow-row">
+          <div class="flow-box agent">
+            <div class="tag">Agent #5</div>
+            <div class="name">Customer Call QA</div>
+          </div>
+          <div class="arrow-h">→</div>
+          <div class="flow-box tool">
+            <div class="tag">Output</div>
+            <div class="name">Weekly Digest to Drew</div>
+          </div>
+        </div>
+        <div class="arrow">↓</div>
+
+        <!-- Back office -->
+        <div class="flow-row">
+          <div class="flow-box agent">
+            <div class="tag">Agent #7</div>
+            <div class="name">Bookkeeping Reconciler</div>
+          </div>
+          <div class="flow-box agent">
+            <div class="tag">Agent #8</div>
+            <div class="name">Founder Brief Writer</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Role breakdown -->
+    <div class="section">
+      <div class="section-title">3. Role Breakdown — Who Does What</div>
+      <div class="section-sub">Vladimir builds + operates. VAs come in after launch.</div>
+
+      <div class="roles-grid">
+
+        <!-- Vladimir -->
+        <div class="role-card vlad-role">
+          <h3>Vladimir</h3>
+          <span class="status status-active">Active now</span>
+          <div class="mission">Build, deploy, and operate the entire Konsier AI system. Train VAs after launch. Long-term operator per Drew's SOP commitment.</div>
+
+          <div class="label">Daily work</div>
+          <ul>
+            <li>Build + maintain all 8 Claude agents</li>
+            <li>Build + maintain all n8n workflows</li>
+            <li>Monitor KS-ERR error alerts</li>
+            <li>Update progress report</li>
+            <li>Pull API keys, configure credentials</li>
+          </ul>
+
+          <div class="label">Tools (full access)</div>
+          <ul>
+            <li>n8n (admin)</li>
+            <li>Pipedrive (admin)</li>
+            <li>Apollo, Instantly, HeyReach, Retell, Wistia, Stripe, DocuSign, Calendly, QBO</li>
+            <li>Microsoft 365, Notion, GitHub</li>
+            <li>1Password (vault access to multiple)</li>
+          </ul>
+
+          <div class="label">After launch</div>
+          <ul>
+            <li>Train Outbound VA on Apollo + Instantly + Pipedrive workflow</li>
+            <li>Train Fulfillment VA on Retell config + customer onboarding</li>
+            <li>Build training SOPs in Notion</li>
+            <li>Ongoing system updates + new features</li>
+          </ul>
+        </div>
+
+        <!-- Outbound VA -->
+        <div class="role-card outbound-role">
+          <h3>Outbound VA</h3>
+          <span class="status status-pending">Hired after launch</span>
+          <div class="mission">Run the cold outbound machine day-to-day. Build lead lists, manage Instantly campaigns, route replies, book demos.</div>
+
+          <div class="label">Daily responsibilities</div>
+          <ul>
+            <li>Build 50-100 verified lead lists in Apollo</li>
+            <li>Upload lists to Instantly campaigns</li>
+            <li>Monitor inbox every 2-3 hours for replies</li>
+            <li>Classify replies (positive / objection / unsubscribe)</li>
+            <li>Edit AI-drafted follow-ups before sending</li>
+            <li>Track daily metrics in Notion</li>
+          </ul>
+
+          <div class="label">Weekly responsibilities</div>
+          <ul>
+            <li>Mail-tester on 2 outbound mailboxes</li>
+            <li>Review Deliverability Sentinel alerts</li>
+            <li>Sync with Drew on conversion data</li>
+            <li>Update Pipedrive for stalled deals</li>
+          </ul>
+
+          <div class="label">Tools (limited access)</div>
+          <ul>
+            <li>Apollo Professional</li>
+            <li>Instantly Hypergrowth</li>
+            <li>Pipedrive (OUTBOUND pipeline, deal updates only)</li>
+            <li>Calendly</li>
+            <li>Notion (daily metrics)</li>
+            <li>1Password (vault 03 only)</li>
+          </ul>
+
+          <div class="label">Pay</div>
+          <ul>
+            <li>$6-12/hour · 20 hrs/wk part-time start</li>
+            <li>$50 bonus per Qualified-stage demo (max $500/mo)</li>
+            <li>Total: $520-1,460/month</li>
+          </ul>
+        </div>
+
+        <!-- Fulfillment VA -->
+        <div class="role-card fulfillment-role">
+          <h3>Fulfillment VA</h3>
+          <span class="status status-later">Hired after customer 3-5</span>
+          <div class="mission">Own customer onboarding from won-deal to live. Build customer trust through fast, professional, white-glove service.</div>
+
+          <div class="label">Daily responsibilities</div>
+          <ul>
+            <li>Onboard new customers within 48 hours</li>
+            <li>Configure Retell AI receptionist per customer</li>
+            <li>Test the AI by calling it as synthetic customer</li>
+            <li>Provision phone numbers via Retell</li>
+            <li>Send go-live confirmations</li>
+            <li>Monitor info@konsier.ai support inbox</li>
+            <li>Respond to tickets within 4 business hours</li>
+          </ul>
+
+          <div class="label">Weekly responsibilities</div>
+          <ul>
+            <li>Review Customer Health Monitor flags</li>
+            <li>Send weekly call summary to each customer</li>
+            <li>Update customer configurations as needed</li>
+            <li>Quarterly account reviews</li>
+          </ul>
+
+          <div class="label">Tools (limited access)</div>
+          <ul>
+            <li>Retell AI (configure customer agents)</li>
+            <li>Pipedrive (CUSTOMER LIFECYCLE only)</li>
+            <li>Notion (Customer Onboarding Wiki)</li>
+            <li>Microsoft 365 (info@konsier.ai)</li>
+            <li>Stripe (view-only)</li>
+            <li>1Password (vault 06 only)</li>
+          </ul>
+
+          <div class="label">Pay</div>
+          <ul>
+            <li>$8-15/hour · 20 hrs/wk start</li>
+            <li>$25 bonus per 48-hr onboarding</li>
+            <li>Total: $700-1,800/month</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Training path -->
+    <div class="section">
+      <div class="section-title">4. Vladimir's Training Path — What I Need to Master Before Training VAs</div>
+      <div class="section-sub">Claude trains me as we build · I get hands-on with each tool · I document everything for VA training</div>
+
+      <div class="training-grid">
+
+        <div class="train-card">
+          <span class="num">1</span><h4>Apollo</h4>
+          <div class="progress">Learning · Hands-on while building KS-WF6</div>
+          <div class="progress-bar"><div class="progress-fill partial" style="width:60%"></div></div>
+          <div class="skills">ICP search filters · keyword tags · employee ranges · pagination · API key management · credit usage · list exports · de-duplication</div>
+        </div>
+
+        <div class="train-card">
+          <span class="num">2</span><h4>Instantly</h4>
+          <div class="progress">Learning · Hands-on while building KS-WF6 reply handler</div>
+          <div class="progress-bar"><div class="progress-fill early" style="width:30%"></div></div>
+          <div class="skills">Campaign setup · email sequence writing · mailbox warmup · inbox rotation · reply webhooks · API V2 · lead upload · personalization variables · deliverability scores</div>
+        </div>
+
+        <div class="train-card">
+          <span class="num">3</span><h4>Retell AI</h4>
+          <div class="progress">Not started · Drew confirmed account is set up</div>
+          <div class="progress-bar"><div class="progress-fill early" style="width:5%"></div></div>
+          <div class="skills">Agent configuration · voice selection · prompt engineering for voice · FAQ training · phone number provisioning · webhook events (call_started, call_ended, call_analyzed) · metadata pass-through · transcript parsing</div>
+        </div>
+
+        <div class="train-card">
+          <span class="num">4</span><h4>Pipedrive</h4>
+          <div class="progress">Already proficient · Built all 3 pipelines + custom fields</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:95%"></div></div>
+          <div class="skills">Pipelines · stages · custom fields · permission sets · automations · webhooks · API · deal/person/org structure · activity types · labels</div>
+        </div>
+
+        <div class="train-card">
+          <span class="num">5</span><h4>n8n</h4>
+          <div class="progress">Already proficient · Built all VC + Konsier workflows</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
+          <div class="skills">Webhook nodes · HTTP requests · Code nodes · Switch routing · Schedule triggers · Slack/Pipedrive integrations · error handlers · sub-workflows · credential management</div>
+        </div>
+
+        <div class="train-card">
+          <span class="num">6</span><h4>Claude API + Agents</h4>
+          <div class="progress">Learning · Will build all 8 agents</div>
+          <div class="progress-bar"><div class="progress-fill partial" style="width:50%"></div></div>
+          <div class="skills">Prompt engineering · system prompts · message structure · JSON parsing · cost optimization (Haiku vs Sonnet) · batching · response validation · token logging</div>
+        </div>
+
+        <div class="train-card">
+          <span class="num">7</span><h4>Calendly</h4>
+          <div class="progress">Not started · Coming with KS-WF5</div>
+          <div class="progress-bar"><div class="progress-fill early" style="width:10%"></div></div>
+          <div class="skills">Event types · webhooks (invitee.created) · embedding · time zone handling · routing forms · integrations with Pipedrive</div>
+        </div>
+
+        <div class="train-card">
+          <span class="num">8</span><h4>Stripe + DocuSign</h4>
+          <div class="progress">Not started · KS-WF4 onboarding chain</div>
+          <div class="progress-bar"><div class="progress-fill early" style="width:10%"></div></div>
+          <div class="skills">Checkout sessions · webhooks (checkout.session.completed) · metadata pass-through · subscription tracking · DocuSign templates · envelope API · webhook events</div>
+        </div>
+
+        <div class="train-card">
+          <span class="num">9</span><h4>Notion</h4>
+          <div class="progress">Basic · Need to learn template + wiki structure for VA SOPs</div>
+          <div class="progress-bar"><div class="progress-fill early" style="width:20%"></div></div>
+          <div class="skills">Database design · templates · API integration · permission sharing · customer wiki pattern · daily metric dashboards</div>
+        </div>
+
+        <div class="train-card">
+          <span class="num">10</span><h4>QuickBooks Online + Microsoft 365</h4>
+          <div class="progress">Not started · Phase 5/6 territory</div>
+          <div class="progress-bar"><div class="progress-fill early" style="width:5%"></div></div>
+          <div class="skills">QBO API · chart of accounts · Stripe reconciliation · P&amp;L narratives · M365 shared mailbox setup · email aliases · API access</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Why this matters -->
+    <div class="section">
+      <div class="section-title">5. Why This Structure Works</div>
+
+      <div class="roles-grid">
+        <div class="role-card vlad-role">
+          <h3>Speed of Learning</h3>
+          <div class="mission" style="border-bottom:none; padding-bottom:0;">Claude trains Vladimir in real-time as the system is built. By the time the system is live, Vladimir has hands-on experience with every tool in production — not just theory. That hands-on experience becomes the training material for VAs.</div>
+        </div>
+
+        <div class="role-card outbound-role">
+          <h3>Documentation as Byproduct</h3>
+          <div class="mission" style="border-bottom:none; padding-bottom:0;">Every n8n workflow has sticky notes (per SOP). Every Claude agent has a system prompt in GitHub. The progress report tracks every decision. By launch, the training SOPs for VAs are 80% written — just need to be polished into Notion guides.</div>
+        </div>
+
+        <div class="role-card fulfillment-role">
+          <h3>Long-term Operator Position</h3>
+          <div class="mission" style="border-bottom:none; padding-bottom:0;">Drew explicitly wrote in the SOP: "I'd love for you to be the person running that long-term." VAs handle day-to-day operations. Vladimir handles system architecture, agent tuning, scaling to new verticals, and overseeing the VAs. That's the retainer position.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Konsier AI System Map · Last updated: May 15, 2026 · Built by Vladimir · Trained by Claude
+    </div>
+
+  </div>
+</body>
+</html>
