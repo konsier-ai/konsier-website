@@ -544,41 +544,45 @@
     <!-- Role breakdown -->
     <div class="section">
       <div class="section-title">3. Role Breakdown — PROPOSAL (Pending Drew's Review)</div>
-      <div class="section-sub">⚠ PROPOSAL, not finalized. Rewritten from Drew's original drafts using the expert standard: group by function, not title. Each function has a predictable output. Builder + automated tasks stripped from VA roles. For discussion with Drew.</div>
+      <div class="section-sub">⚠ PROPOSAL, not finalized. The core finding: Drew's Role 1 + Role 3 drafts both contained builder / AI-builder tasks — but VAs are not builders. This proposal strips ALL builder tasks out of the VA roles and consolidates them into Role 2. Role 1 + Role 3 = clean operator/admin roles. Role 2 = all builder/AI work.</div>
 
       <div class="roles-grid">
 
         <!-- Role 2 — Vladimir -->
         <div class="role-card vlad-role">
           <h3>Role 2 — AI Automation Architect</h3>
-          <span class="status status-active">Vladimir · Active now</span>
-          <div class="mission">Designs, builds, and operates the entire Konsier system (8 agents, all workflows, Retell Knowledge Base). Trains + oversees both VAs. The technical hub — both VA roles feed it information; it improves the system.</div>
+          <span class="status status-active">Vladimir · Builder / technical · Reports to Drew</span>
+          <div class="mission">Designs, builds, and operates the entire Konsier system. Owns EVERY builder + AI task — including the technical tasks wrongly placed in the VA drafts. Trains both VAs. The hands of the operation.</div>
 
-          <div class="label">Core functions</div>
+          <div class="label">F1 — System Build & Maintenance</div>
           <ul>
-            <li>Build + maintain all 8 AI agents + n8n workflows</li>
-            <li>Configure all Retell agents (master template + Agent #6)</li>
-            <li>Deliverability diagnosis + DNS/DKIM fixes</li>
-            <li>Retell Knowledge Base tuning from VA insight</li>
-            <li>Train VAs + author all SOPs</li>
+            <li>Build + maintain all 8 AI agents + n8n workflows, KS-ERR monitoring</li>
+            <li><em>Output: a working, monitored automation system</em></li>
           </ul>
 
-          <div class="label">Owns (technical tasks pulled from VA roles)</div>
+          <div class="label">F2 — AI Config & Knowledge Base</div>
           <ul>
-            <li>Retell agent configuration (not the VA)</li>
-            <li>Phone number porting</li>
-            <li>Customer config updates</li>
-            <li>"Act on flagged mailboxes" — deliverability fixes</li>
+            <li>Master Retell template + Agent #6; ingest VA intelligence into Retell KB</li>
+            <li><em>Output: every receptionist works + improves over time</em></li>
           </ul>
 
-          <div class="label">Scope</div>
+          <div class="label">F3 — Technical Operations (builder tasks pulled from Role 1 + 3)</div>
           <ul>
-            <li>Konsier + postponed Velocity Capital build</li>
-            <li>Reports to Drew directly</li>
+            <li>Configure Retell receptionists (was in Role 3 draft)</li>
+            <li>Diagnose + fix deliverability — DNS/DKIM (was "act on flagged mailboxes" in Role 1)</li>
+            <li>Port phone numbers + update customer configs (was in Role 3)</li>
+            <li><em>Output: the technical layer VAs cannot touch</em></li>
           </ul>
 
-          <div class="label">Market rate</div>
+          <div class="label">F4 — Team Enablement</div>
           <ul>
+            <li>Train both VAs, author all SOPs, turn VA intelligence into system upgrades</li>
+            <li><em>Output: VAs that ramp fast + operate independently</em></li>
+          </ul>
+
+          <div class="label">Scope · Market context</div>
+          <ul>
+            <li>Carries Konsier + postponed Velocity Capital build</li>
             <li>AI Automation Architect: US $145-167k/yr</li>
           </ul>
         </div>
@@ -586,73 +590,74 @@
         <!-- Role 1 — Outbound Operations VA -->
         <div class="role-card outbound-role">
           <h3>Role 1 — Outbound Operations VA</h3>
-          <span class="status status-pending">Hire after KS-WF6 produces leads</span>
-          <div class="mission">Operate and oversee the automated outbound system. The system sources, sends, and classifies — the VA ensures quality, hygiene, and surfaces insight to Role 2.</div>
+          <span class="status status-pending">Operator / admin · ZERO builder tasks</span>
+          <div class="mission">Run the admin layer of the automated outbound system. Ensure quality and hygiene, feed intelligence to Role 2. The eyes of the outbound operation.</div>
 
-          <div class="label">F1 — Reply Quality Assurance</div>
+          <div class="label">F1 — Email Triage & Reply QA</div>
           <ul>
-            <li>Review AI-classified replies, edit AI drafts before send</li>
-            <li><em>Output: every outgoing reply human-checked</em></li>
+            <li>Review AI-classified replies, priority-tier judgment, edit drafts before send</li>
+            <li><em>Output: every reply human-checked; hot replies actioned in 2 min</em></li>
           </ul>
 
-          <div class="label">F2 — Pipeline Hygiene</div>
+          <div class="label">F2 — Pipeline & CRM Hygiene</div>
           <ul>
-            <li>Update Pipedrive notes/fields, action KS-A4 stalled alerts</li>
-            <li><em>Output: clean, current OUTBOUND pipeline</em></li>
+            <li>Pipedrive deal notes/fields, action KS-A4 stalled alerts, clean data</li>
+            <li><em>Output: accurate, current OUTBOUND pipeline</em></li>
           </ul>
 
           <div class="label">F3 — Deliverability Monitoring</div>
           <ul>
-            <li>Weekly mail-tester, flag failing mailboxes to Role 2</li>
-            <li><em>Output: early warning (VA flags, does not fix)</em></li>
+            <li>Weekly mail-tester, track health + bounce rate, FLAG failures to Role 2</li>
+            <li><em>Output: early warning (VA flags — Role 2 fixes)</em></li>
           </ul>
 
-          <div class="label">F4 — Metrics &amp; Reporting</div>
+          <div class="label">F4 — Metrics & Reporting</div>
           <ul>
-            <li>Log daily metrics in Notion, weekly sync</li>
-            <li><em>Output: daily/weekly numbers picture</em></li>
+            <li>Notion daily log, weekly conversion sync</li>
+            <li><em>Output: clear daily/weekly numbers picture</em></li>
           </ul>
 
-          <div class="label">F5 — Information Gathering</div>
+          <div class="label">F5 — Outbound Intelligence</div>
           <ul>
-            <li>Surface reply patterns + objections → report to Role 2</li>
-            <li><em>Output: insight feed that improves the engine</em></li>
+            <li>Gather reply patterns + objections → report to Role 2</li>
+            <li><em>Output: intelligence feed that sharpens the engine</em></li>
           </ul>
 
-          <div class="label">Pay · $6-12/hr · 20 hrs/wk start</div>
+          <div class="label">Builder tasks removed → Role 2</div>
           <ul>
-            <li>Market: cold email VA $10-15/hr generalist</li>
+            <li>"Act on / fix flagged mailboxes" → Role 2 (technical)</li>
+            <li>Pay: $6-12/hr · 20 hrs/wk start</li>
           </ul>
         </div>
 
         <!-- Role 3 — Customer Onboarding & Success VA -->
         <div class="role-card fulfillment-role">
           <h3>Role 3 — Customer Onboarding &amp; Success VA</h3>
-          <span class="status status-later">Hire after customer 3-5</span>
-          <div class="mission">Take customers from won-deal to live, then keep them healthy. White-glove service. Gather what the AI receptionist encounters and feed it to Role 2.</div>
+          <span class="status status-later">Operator / admin · ZERO builder tasks</span>
+          <div class="mission">Take customers from won-deal to live, keep them healthy, gather what Retell encounters on real calls. The eyes of the customer operation.</div>
 
-          <div class="label">F1 — Onboarding Execution</div>
+          <div class="label">F1 — Onboarding Admin</div>
           <ul>
-            <li>Review AI-generated Retell config (Agent #6), test, provision number</li>
-            <li><em>Output: customer live in 48 hrs (reviews + tests, doesn't build)</em></li>
+            <li>Review AI-generated config (Agent #6), test, provision number, go-live</li>
+            <li><em>Output: customer live in 48 hrs (reviews + tests — Role 2 builds)</em></li>
           </ul>
 
-          <div class="label">F2 — Customer Support</div>
+          <div class="label">F2 — Customer Support Admin</div>
           <ul>
-            <li>Monitor info@konsier.ai, respond within 4 hrs</li>
+            <li>Priority-tier triage on info@konsier.ai, respond within 4 hrs</li>
             <li><em>Output: every question answered or escalated in 4 hrs</em></li>
           </ul>
 
-          <div class="label">F3 — Customer Health &amp; Retention</div>
+          <div class="label">F3 — Customer Health Admin</div>
           <ul>
             <li>Review health flags, check-in calls, quarterly reviews</li>
             <li><em>Output: churn caught early</em></li>
           </ul>
 
-          <div class="label">F4 — Information Gathering</div>
+          <div class="label">F4 — Customer-Call Intelligence</div>
           <ul>
-            <li>Collect what Retell encountered → report to Role 2 for KB updates</li>
-            <li><em>Output: insight that makes every agent smarter</em></li>
+            <li>Gather what Retell couldn't answer → report to Role 2 for KB</li>
+            <li><em>Output: intelligence that makes every receptionist smarter</em></li>
           </ul>
 
           <div class="label">F5 — Customer Reporting</div>
@@ -661,12 +666,17 @@
             <li><em>Output: customers see value weekly</em></li>
           </ul>
 
-          <div class="label">Pay · $8-15/hr · 20 hrs/wk start</div>
+          <div class="label">Builder tasks removed → Role 2</div>
           <ul>
-            <li>Market: onboarding specialist VA, PH $400-1,000/mo</li>
+            <li>"Configure Retell," "port numbers," "update config" → Role 2</li>
+            <li>Pay: $8-15/hr · 20 hrs/wk start</li>
           </ul>
         </div>
 
+      </div>
+
+      <div class="section-sub" style="margin-top:20px; margin-bottom:0;">
+        <strong>How Role 1/3 and Role 2 interlock:</strong> the VA is the eyes — observes, operates, flags, reports. Role 2 is the hands — builds, fixes, tunes. Mailbox health drops → VA flags it, Role 2 fixes the DNS. Reply pattern shifts → VA reports it, Role 2 retunes the agent. The VA never touches the build.
       </div>
     </div>
 
