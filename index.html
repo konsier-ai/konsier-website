@@ -328,7 +328,7 @@
 
     <div class="header">
       <h1>Konsier AI System — Training & Operations Map</h1>
-      <p>How Claude trains Vladimir, who builds the system and trains the 2 VAs — May 15, 2026</p>
+      <p>System architecture, 3-role team structure, and function-grouped job descriptions — May 16, 2026</p>
     </div>
 
 
@@ -370,14 +370,14 @@
         <div class="h-row">
           <div class="h-node va">
             <div class="role">Role 1</div>
-            <div class="name">Outbound VA</div>
-            <div class="desc">Hired after launch · Manages cold outreach + replies</div>
+            <div class="name">Outbound Operations VA</div>
+            <div class="desc">Hired after KS-WF6 produces leads · Oversees the outbound system</div>
             <div class="training-badge">Trained by Vladimir</div>
           </div>
           <div class="h-node va">
             <div class="role">Role 3</div>
-            <div class="name">Fulfillment VA</div>
-            <div class="desc">Hired after customer 3-5 · Handles onboarding + support</div>
+            <div class="name">Customer Onboarding &amp; Success VA</div>
+            <div class="desc">Hired after customer 3-5 · Onboarding + support + retention</div>
             <div class="training-badge">Trained by Vladimir</div>
           </div>
         </div>
@@ -453,8 +453,8 @@
           </div>
           <div class="arrow-h">→</div>
           <div class="flow-box va">
-            <div class="tag">Outbound VA</div>
-            <div class="name">Review & Edit Reply</div>
+            <div class="tag">Outbound Operations VA</div>
+            <div class="name">Review & Edit Reply (QA)</div>
           </div>
         </div>
         <div class="arrow">↓</div>
@@ -510,8 +510,8 @@
           </div>
           <div class="arrow-h">→</div>
           <div class="flow-box va">
-            <div class="tag">Fulfillment VA</div>
-            <div class="name">Configure Retell for Customer</div>
+            <div class="tag">Onboarding & Success VA</div>
+            <div class="name">Review Config + Test + Provision</div>
           </div>
           <div class="arrow-h">→</div>
           <div class="flow-box action">
@@ -552,126 +552,127 @@
 
     <!-- Role breakdown -->
     <div class="section">
-      <div class="section-title">3. Role Breakdown — Who Does What</div>
-      <div class="section-sub">Vladimir builds + operates. VAs come in after launch.</div>
+      <div class="section-title">3. Role Breakdown — Function-Grouped (Researched Titles)</div>
+      <div class="section-sub">Rewritten using the expert standard: group by function, not title. Each function has a predictable output. Builder + automated tasks stripped from VA roles.</div>
 
       <div class="roles-grid">
 
-        <!-- Vladimir -->
+        <!-- Role 2 — Vladimir -->
         <div class="role-card vlad-role">
-          <h3>Vladimir</h3>
-          <span class="status status-active">Active now</span>
-          <div class="mission">Build, deploy, and operate the entire Konsier AI system. Train VAs after launch. Long-term operator per Drew's SOP commitment.</div>
+          <h3>Role 2 — AI Automation Architect</h3>
+          <span class="status status-active">Vladimir · Active now</span>
+          <div class="mission">Designs, builds, and operates the entire Konsier system (8 agents, all workflows, Retell Knowledge Base). Trains + oversees both VAs. The technical hub — both VA roles feed it information; it improves the system.</div>
 
-          <div class="label">Daily work</div>
+          <div class="label">Core functions</div>
           <ul>
-            <li>Build + maintain all 8 Claude agents</li>
-            <li>Build + maintain all n8n workflows</li>
-            <li>Monitor KS-ERR error alerts</li>
-            <li>Update progress report</li>
-            <li>Pull API keys, configure credentials</li>
+            <li>Build + maintain all 8 Claude agents + n8n workflows</li>
+            <li>Configure all Retell agents (master template + Agent #6)</li>
+            <li>Deliverability diagnosis + DNS/DKIM fixes</li>
+            <li>Retell Knowledge Base tuning from VA insight</li>
+            <li>Train VAs + author all SOPs</li>
           </ul>
 
-          <div class="label">Tools (full access)</div>
+          <div class="label">Owns (technical tasks pulled from VA roles)</div>
           <ul>
-            <li>n8n (admin)</li>
-            <li>Pipedrive (admin)</li>
-            <li>Apollo, Instantly, HeyReach, Retell, Wistia, Stripe, DocuSign, Calendly, QBO</li>
-            <li>Microsoft 365, Notion, GitHub</li>
-            <li>1Password (vault access to multiple)</li>
+            <li>Retell agent configuration (not the VA)</li>
+            <li>Phone number porting</li>
+            <li>Customer config updates</li>
+            <li>"Act on flagged mailboxes" — deliverability fixes</li>
           </ul>
 
-          <div class="label">After launch</div>
+          <div class="label">Scope</div>
           <ul>
-            <li>Train Outbound VA on Apollo + Instantly + Pipedrive workflow</li>
-            <li>Train Fulfillment VA on Retell config + customer onboarding</li>
-            <li>Build training SOPs in Notion</li>
-            <li>Ongoing system updates + new features</li>
+            <li>Konsier + postponed Velocity Capital build</li>
+            <li>Reports to Drew directly</li>
+          </ul>
+
+          <div class="label">Market rate</div>
+          <ul>
+            <li>AI Automation Architect: US $145-167k/yr</li>
           </ul>
         </div>
 
-        <!-- Outbound VA -->
+        <!-- Role 1 — Outbound Operations VA -->
         <div class="role-card outbound-role">
-          <h3>Outbound VA</h3>
-          <span class="status status-pending">Hired after launch</span>
-          <div class="mission">Run the cold outbound machine day-to-day. Build lead lists, manage Instantly campaigns, route replies, book demos.</div>
+          <h3>Role 1 — Outbound Operations VA</h3>
+          <span class="status status-pending">Hire after KS-WF6 produces leads</span>
+          <div class="mission">Operate and oversee the automated outbound system. The system sources, sends, and classifies — the VA ensures quality, hygiene, and surfaces insight to Role 2.</div>
 
-          <div class="label">Daily responsibilities</div>
+          <div class="label">F1 — Reply Quality Assurance</div>
           <ul>
-            <li>Build 50-100 verified lead lists in Apollo</li>
-            <li>Upload lists to Instantly campaigns</li>
-            <li>Monitor inbox every 2-3 hours for replies</li>
-            <li>Classify replies (positive / objection / unsubscribe)</li>
-            <li>Edit AI-drafted follow-ups before sending</li>
-            <li>Track daily metrics in Notion</li>
+            <li>Review AI-classified replies, edit AI drafts before send</li>
+            <li><em>Output: every outgoing reply human-checked</em></li>
           </ul>
 
-          <div class="label">Weekly responsibilities</div>
+          <div class="label">F2 — Pipeline Hygiene</div>
           <ul>
-            <li>Mail-tester on 2 outbound mailboxes</li>
-            <li>Review Deliverability Sentinel alerts</li>
-            <li>Sync with Drew on conversion data</li>
-            <li>Update Pipedrive for stalled deals</li>
+            <li>Update Pipedrive notes/fields, action KS-A4 stalled alerts</li>
+            <li><em>Output: clean, current OUTBOUND pipeline</em></li>
           </ul>
 
-          <div class="label">Tools (limited access)</div>
+          <div class="label">F3 — Deliverability Monitoring</div>
           <ul>
-            <li>Apollo Professional</li>
-            <li>Instantly Hypergrowth</li>
-            <li>Pipedrive (OUTBOUND pipeline, deal updates only)</li>
-            <li>Calendly</li>
-            <li>Notion (daily metrics)</li>
-            <li>1Password (vault 03 only)</li>
+            <li>Weekly mail-tester, flag failing mailboxes to Role 2</li>
+            <li><em>Output: early warning (VA flags, does not fix)</em></li>
           </ul>
 
-          <div class="label">Pay</div>
+          <div class="label">F4 — Metrics &amp; Reporting</div>
           <ul>
-            <li>$6-12/hour · 20 hrs/wk part-time start</li>
-            <li>$50 bonus per Qualified-stage demo (max $500/mo)</li>
-            <li>Total: $520-1,460/month</li>
+            <li>Log daily metrics in Notion, weekly sync</li>
+            <li><em>Output: daily/weekly numbers picture</em></li>
+          </ul>
+
+          <div class="label">F5 — Information Gathering</div>
+          <ul>
+            <li>Surface reply patterns + objections → report to Role 2</li>
+            <li><em>Output: insight feed that improves the engine</em></li>
+          </ul>
+
+          <div class="label">Pay · $6-12/hr · 20 hrs/wk start</div>
+          <ul>
+            <li>Market: cold email VA $10-15/hr generalist</li>
           </ul>
         </div>
 
-        <!-- Fulfillment VA -->
+        <!-- Role 3 — Customer Onboarding & Success VA -->
         <div class="role-card fulfillment-role">
-          <h3>Fulfillment VA</h3>
-          <span class="status status-later">Hired after customer 3-5</span>
-          <div class="mission">Own customer onboarding from won-deal to live. Build customer trust through fast, professional, white-glove service.</div>
+          <h3>Role 3 — Customer Onboarding &amp; Success VA</h3>
+          <span class="status status-later">Hire after customer 3-5</span>
+          <div class="mission">Take customers from won-deal to live, then keep them healthy. White-glove service. Gather what the AI receptionist encounters and feed it to Role 2.</div>
 
-          <div class="label">Daily responsibilities</div>
+          <div class="label">F1 — Onboarding Execution</div>
           <ul>
-            <li>Onboard new customers within 48 hours</li>
-            <li>Configure Retell AI receptionist per customer</li>
-            <li>Test the AI by calling it as synthetic customer</li>
-            <li>Provision phone numbers via Retell</li>
-            <li>Send go-live confirmations</li>
-            <li>Monitor info@konsier.ai support inbox</li>
-            <li>Respond to tickets within 4 business hours</li>
+            <li>Review AI-generated Retell config (Agent #6), test, provision number</li>
+            <li><em>Output: customer live in 48 hrs (reviews + tests, doesn't build)</em></li>
           </ul>
 
-          <div class="label">Weekly responsibilities</div>
+          <div class="label">F2 — Customer Support</div>
           <ul>
-            <li>Review Customer Health Monitor flags</li>
-            <li>Send weekly call summary to each customer</li>
-            <li>Update customer configurations as needed</li>
-            <li>Quarterly account reviews</li>
+            <li>Monitor info@konsier.ai, respond within 4 hrs</li>
+            <li><em>Output: every question answered or escalated in 4 hrs</em></li>
           </ul>
 
-          <div class="label">Tools (limited access)</div>
+          <div class="label">F3 — Customer Health &amp; Retention</div>
           <ul>
-            <li>Retell AI (configure customer agents)</li>
-            <li>Pipedrive (CUSTOMER LIFECYCLE only)</li>
-            <li>Notion (Customer Onboarding Wiki)</li>
-            <li>Microsoft 365 (info@konsier.ai)</li>
-            <li>Stripe (view-only)</li>
-            <li>1Password (vault 06 only)</li>
+            <li>Review health flags, check-in calls, quarterly reviews</li>
+            <li><em>Output: churn caught early</em></li>
           </ul>
 
-          <div class="label">Pay</div>
+          <div class="label">F4 — Information Gathering</div>
           <ul>
-            <li>$8-15/hour · 20 hrs/wk start</li>
-            <li>$25 bonus per 48-hr onboarding</li>
-            <li>Total: $700-1,800/month</li>
+            <li>Collect what Retell encountered → report to Role 2 for KB updates</li>
+            <li><em>Output: insight that makes every agent smarter</em></li>
+          </ul>
+
+          <div class="label">F5 — Customer Reporting</div>
+          <ul>
+            <li>Weekly call summaries to customers, log in Notion</li>
+            <li><em>Output: customers see value weekly</em></li>
+          </ul>
+
+          <div class="label">Pay · $8-15/hr · 20 hrs/wk start</div>
+          <ul>
+            <li>Market: onboarding specialist VA, PH $400-1,000/mo</li>
           </ul>
         </div>
 
@@ -764,24 +765,24 @@
 
       <div class="roles-grid">
         <div class="role-card vlad-role">
-          <h3>Speed of Learning</h3>
-          <div class="mission" style="border-bottom:none; padding-bottom:0;">Claude trains Vladimir in real-time as the system is built. By the time the system is live, Vladimir has hands-on experience with every tool in production — not just theory. That hands-on experience becomes the training material for VAs.</div>
+          <h3>Function, Not Title</h3>
+          <div class="mission" style="border-bottom:none; padding-bottom:0;">VA-delegation experts agree: delegation works when tasks are grouped by function with predictable outputs — not by job title. These JDs strip out builder + automated tasks so each VA owns clean workflows. The known anti-pattern (mixed-function role lists) is avoided.</div>
         </div>
 
         <div class="role-card outbound-role">
           <h3>Documentation as Byproduct</h3>
-          <div class="mission" style="border-bottom:none; padding-bottom:0;">Every n8n workflow has sticky notes (per SOP). Every Claude agent has a system prompt in GitHub. The progress report tracks every decision. By launch, the training SOPs for VAs are 80% written — just need to be polished into Notion guides.</div>
+          <div class="mission" style="border-bottom:none; padding-bottom:0;">Every n8n workflow has sticky notes. Every Claude agent has a versioned system prompt. By launch, the training SOPs for VAs are 80% written — just polished into Notion guides. Experts: invest 2-3 days in SOPs up front → VA independent in week 1 vs 3-4 weeks.</div>
         </div>
 
         <div class="role-card fulfillment-role">
-          <h3>Long-term Operator Position</h3>
-          <div class="mission" style="border-bottom:none; padding-bottom:0;">Drew explicitly wrote in the SOP: "I'd love for you to be the person running that long-term." VAs handle day-to-day operations. Vladimir handles system architecture, agent tuning, scaling to new verticals, and overseeing the VAs. That's the retainer position.</div>
+          <h3>System First, Team After</h3>
+          <div class="mission" style="border-bottom:none; padding-bottom:0;">Liam Ottley (AAA): consistent lead generation must precede team hiring — the #1 agency failure is hiring too early. Role 2 builds the system; the VAs are hired only once it produces steady output. The VAs depend on the architecture existing first.</div>
         </div>
       </div>
     </div>
 
     <div class="footer">
-      Konsier AI System Map · Last updated: May 15, 2026 · Built by Vladimir · Trained by Claude
+      Konsier AI System Map · Last updated: May 16, 2026
     </div>
 
   </div>
